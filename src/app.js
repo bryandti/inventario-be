@@ -11,9 +11,24 @@ let db;
 let collection;
 
 app.use(cors());
-app.listen(3000, function () {
-    console.log('listening on '+port)
+
+
+
+// import packages
+const https = require('https');
+const fs = require('fs');
+
+// serve the API with signed certificate on 443 (SSL/HTTPS) port
+const httpsServer = https.createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/munibe.oligarchy.io/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/munibe.oligarchy.io/fullchain.pem'),
+}, app);
+
+httpsServer.listen(443, () => {
+    console.log('HTTPS Server running on port 443');
 });
+
+
 
 MongoClient.connect('mongodb://localhost/invetario', { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
     if (err) return console.error(err)
