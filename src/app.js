@@ -1,14 +1,16 @@
 const MongoClient = require('mongodb').MongoClient;
-var bodyParser = require('body-parser')
+let cors = require('cors')
+let bodyParser = require('body-parser')
 const express = require('express');
 const app = express();
 const port = 3000;
 
-var jsonParser = bodyParser.json();
+let jsonParser = bodyParser.json();
 
 let db;
 let collection;
 
+app.use(cors());
 app.listen(3000, function () {
     console.log('listening on '+port)
 });
@@ -24,6 +26,13 @@ app.get('/equipo', (req, res) => {
     db.collection('equipo').find().toArray()
         .then(results => {
             res.json(results);
+        }).catch(error => console.error(error));
+})
+
+app.get('/ultimoequipo', (req, res) => {
+    db.collection('equipo').find().toArray()
+        .then(results => {
+            res.json({coorelativo: results.length + 1});
         }).catch(error => console.error(error));
 })
 
@@ -46,3 +55,4 @@ app.delete('/equipo/:coorelativo', (req, res) => {
         })
         .catch(error => console.error(error))
 })
+
