@@ -60,6 +60,20 @@ app.post('/equipo', jsonParser, (req, res) => {
         .catch(error => console.error(error))
 })
 
+app.get('/equipo/:coorelativo', (req, res) => {
+    db.collection('equipo')
+        .findOne(
+            { "coorelativo": Number(req.params.coorelativo) }
+        )
+        .then(result => {
+            return result.json()
+        })
+        .then(result => {
+            res.json(result);
+        })
+        .catch(error => console.error(error))
+})
+
 app.delete('/equipo/:coorelativo', (req, res) => {
     console.log('Borrando:', req.params.coorelativo)
     db.collection('equipo').deleteMany(
