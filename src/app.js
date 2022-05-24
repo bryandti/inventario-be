@@ -76,6 +76,24 @@ app.get('/equipo/:coorelativo', (req, res) => {
         )
 })
 
+app.get('/equipo/:coorelativo', jsonParser, (req, res) => {
+    db.collection('equipo')
+        .updateOne(
+            { 
+                "responsable.coorelativo":  parseInt(req.params.coorelativo)
+            },
+            { 
+                $set: req.body
+            }
+        )
+        .then(result => res.json(result))
+        .catch(error => {            
+            console.log(error)
+            res.status(500).json({error})
+            }
+        )
+})
+
 app.delete('/equipo/:coorelativo', (req, res) => {
     console.log('Borrando:', req.params.coorelativo)
     db.collection('equipo').deleteMany(
