@@ -63,7 +63,7 @@ app.post('/equipo', jsonParser, (req, res) => {
 app.get('/equipo/:coorelativo', (req, res) => {
     db.collection('equipo')
         .findOne(
-            {}
+            { "coorelativo": Number(req.params.coorelativo) }
         )
         .then(result => {
             res.json(result);
