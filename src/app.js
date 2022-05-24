@@ -65,9 +65,9 @@ app.get('/equipo/:coorelativo', (req, res) => {
     db.collection('equipo')
         .findOne(
             { 
-                "responsable": {
-                    "coorelativo": 2
-                    } 
+                responsable: {
+                    coorelativo: parseInt(req.params.coorelativo)
+                } 
             },
             (err, data) => {
                 if(err) console.log(err)
