@@ -63,14 +63,11 @@ app.post('/equipo', jsonParser, (req, res) => {
 app.get('/equipo/:coorelativo', (req, res) => {
     console.log('Obteniendo:', req.params.coorelativo)
     db.collection('equipo')
-        .find(
+        .findOne(
             { 
-                responsable: {
-                    coorelativo: parseInt(req.params.coorelativo)
-                } 
+                "responsable.coorelativo":  parseInt(req.params.coorelativo)
             }
         )
-        .toArray()
         .then(result => res.json(result))
         .catch(error => console.log(error))
 })
@@ -78,7 +75,7 @@ app.get('/equipo/:coorelativo', (req, res) => {
 app.delete('/equipo/:coorelativo', (req, res) => {
     console.log('Borrando:', req.params.coorelativo)
     db.collection('equipo').deleteMany(
-        { "coorelativo": Number(req.params.coorelativo) }
+        { "responsable.coorelativo": parseInt(req.params.coorelativo) }
     )
         .then(result => {
             res.json('Deleted')
