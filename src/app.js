@@ -63,7 +63,7 @@ app.post('/equipo', jsonParser, (req, res) => {
 app.get('/equipo/:coorelativo', (req, res) => {
     console.log('Obteniendo:', req.params.coorelativo)
     db.collection('equipo')
-        .find(
+        .findOne(
             { "coorelativo": parseInt(req.params.coorelativo) },
             {}
         )
