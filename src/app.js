@@ -76,7 +76,7 @@ app.get('/equipo/:coorelativo', (req, res) => {
         )
 })
 
-app.get('/equipo/:coorelativo', jsonParser, (req, res) => {
+app.put('/equipo/:coorelativo', jsonParser, (req, res) => {
     db.collection('equipo')
         .updateOne(
             { 
