@@ -64,12 +64,15 @@ app.get('/equipo/:coorelativo', (req, res) => {
     console.log('Obteniendo:', req.params.coorelativo)
     db.collection('equipo')
         .findOne(
-            { coorelativo: Number(req.params.coorelativo) }
-        )
-        .then(result => {
-            res.json(result);
-        })
-        .catch(error => console.error(error))
+            { coorelativo: Number(req.params.coorelativo) },
+            (error, result) => {
+                if(error) {
+                    console.log(error);
+                    res.json({error});
+                }
+                res.json(result);
+            }
+        );
 })
 
 app.delete('/equipo/:coorelativo', (req, res) => {
