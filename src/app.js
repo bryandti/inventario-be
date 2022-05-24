@@ -65,10 +65,11 @@ app.get('/equipo/:coorelativo', (req, res) => {
     db.collection('equipo')
         .findOne(
             { "coorelativo": "2" },
-            {}
+            (err, data) => {
+                if(err) console.log(err)
+                console.log(data)
+            }
         )
-        .then(result => res.json(result))
-        .catch(error => console.log(error))
 })
 
 app.delete('/equipo/:coorelativo', (req, res) => {
