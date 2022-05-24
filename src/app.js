@@ -64,7 +64,11 @@ app.get('/equipo/:coorelativo', (req, res) => {
     console.log('Obteniendo:', req.params.coorelativo)
     db.collection('equipo')
         .findOne(
-            { "coorelativo": 2 },
+            { 
+                "responsable": {
+                    "coorelativo": 2
+                    } 
+            },
             (err, data) => {
                 if(err) console.log(err)
                 console.log(data)
