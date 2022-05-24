@@ -69,7 +69,9 @@ app.get('/equipo/:coorelativo', (req, res) => {
                     coorelativo: parseInt(req.params.coorelativo)
                 } 
             }
-        ).then(result => res.json(result))
+        )
+        .toArray()
+        .then(result => res.json(result))
         .catch(error => console.log(error))
 })
 
