@@ -66,7 +66,9 @@ app.get('/equipo/:coorelativo', (req, res) => {
         .findOne(
             { "coorelativo": Number(req.params.coorelativo) },
             {}
-        ).then(result => res.json(result))
+        )
+        .toArray(result => result)
+        .then(result => res.json(result))
         .catch(error => console.log(error))
 })
 
