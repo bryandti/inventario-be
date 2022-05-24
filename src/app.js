@@ -66,9 +66,6 @@ app.get('/equipo/:coorelativo', (req, res) => {
             {}
         )
         .then(result => {
-            return result.json()
-        })
-        .then(result => {
             res.json(result);
         })
         .catch(error => console.error(error))
