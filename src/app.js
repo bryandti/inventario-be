@@ -64,10 +64,9 @@ app.get('/equipo/:coorelativo', (req, res) => {
     console.log('Obteniendo:', req.params.coorelativo)
     db.collection('equipo')
         .find(
-            { "coorelativo": Number(req.params.coorelativo) },
+            { "coorelativo": parseInt(req.params.coorelativo) },
             {}
         )
-        .toArray(result => result)
         .then(result => res.json(result))
         .catch(error => console.log(error))
 })
